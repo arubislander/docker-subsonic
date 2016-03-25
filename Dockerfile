@@ -36,13 +36,14 @@ ENV S_VERSION 5.3
 RUN  curl -o /var/subsonic/subsonic-$S_VERSION-standalone.tar.gz \
      http://subsonic.org/download/subsonic-$S_VERSION-standalone.tar.gz && \
      tar -zxvf subsonic-$S_VERSION-standalone.tar.gz && \
-     rm subsonic-$S_VERSION-standalone.tar.gz && \
-     mkdir ./transcode && \
+     rm subsonic-$S_VERSION-standalone.tar.gz
+RUN  mkdir ./transcode && \
      ln -s `which lame` ./transcode/lame && \
-     ln -s `which ffmpeg` ./transcode/ffmpeg && \
-     sed -i "s/\/var\/music$/\/var\/media\/music/;\
+     ln -s `which ffmpeg` ./transcode/ffmpeg
+RUN  sed -i "s/\/var\/music$/\/var\/media\/music/;\
      s/\/var\/music\/Podcast$/\/var\/media\/podcasts/;\
-     s/\/var\/playlists$/\/var\/media\/playlists/;\ 
-     s/1 \&$/1/" subsonic.sh
+     s/\/var\/playlists$/\/var\/media\/playlists/" subsonic.sh
 
-CMD  /var/subsonic/subsonic.sh
+CMD  /var/subsonic/subsonic.sh && \
+     sleep 30 && \
+     tail -F /var/subsonic/subsonic_sh.log
