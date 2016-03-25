@@ -9,11 +9,16 @@ RUN  apt-get update && apt-get install -y --no-install-recommends curl \
 RUN mkdir -p /var/media/music && \
     mkdir -p /var/media/podcasts && \
     mkdir -p /var/media/videos && \
-    mkdir -p /var/media/pictures
+    mkdir -p /var/media/pictures && \
+    mkdir -p /var/media/playlists
 
 EXPOSE 4040
 
-VOLUME ["/var/media/music", "/var/media/podcasts", "/var/media/videos", "/var/media/pictures"]
+VOLUME ["/var/media/music", \
+        "/var/media/podcasts", \
+        "/var/media/videos", \
+        "/var/media/pictures", \
+        "/var/media/playlists"]
 
 WORKDIR /var/subsonic
 
@@ -31,10 +36,13 @@ ENV S_VERSION 6.0.beta1
 RUN  curl -o /var/subsonic/subsonic-$S_VERSION-standalone.tar.gz \
      http://subsonic.org/download/subsonic-$S_VERSION-standalone.tar.gz && \
      tar -zxvf subsonic-$S_VERSION-standalone.tar.gz && \
-     rm subsonic-$S_VERSION-standalone.tar.gz && \
-     mkdir ./transcode && \
+     rm subsonic-$S_VERSION-standalone.tar.gz
+RUN  mkdir ./transcode && \
      ln -s `which lame` ./transcode/lame && \
      ln -s `which ffmpeg` ./transcode/ffmpeg
+RUN  sed -i "s/\/var\/music$/\/var\/media\/music/;\
+     s/\/var\/music\/Podcast$/\/var\/media\/podcasts/;\
+     s/\/var\/playlists$/\/var\/media\/playlists/" subsonic.sh
 
 CMD  /var/subsonic/subsonic.sh && \
      sleep 30 && \
