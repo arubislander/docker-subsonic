@@ -31,7 +31,7 @@ RUN groupadd -r $S_USER && \
 
 USER $S_USER
 
-ENV S_VERSION 5.3
+ENV S_VERSION 6.0
 
 RUN  curl -o /var/subsonic/subsonic-$S_VERSION-standalone.tar.gz \
      http://subsonic.org/download/subsonic-$S_VERSION-standalone.tar.gz && \
