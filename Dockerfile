@@ -34,7 +34,7 @@ USER $S_USER
 ENV S_VERSION 6.0
 
 RUN  curl -o /var/subsonic/subsonic-$S_VERSION-standalone.tar.gz \
-     http://subsonic.org/download/subsonic-$S_VERSION-standalone.tar.gz && \
+     https://s3-eu-west-1.amazonaws.com/subsonic-public/download/subsonic-$S_VERSION-standalone.tar.gz && \
      tar -zxvf subsonic-$S_VERSION-standalone.tar.gz && \
      rm subsonic-$S_VERSION-standalone.tar.gz
 RUN  mkdir ./transcode && \
