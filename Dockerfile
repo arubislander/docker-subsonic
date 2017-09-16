@@ -31,7 +31,7 @@ RUN groupadd -r $S_USER && \
 
 USER $S_USER
 
-ENV S_VERSION 6.0
+ENV S_VERSION 6.1.1
 
 RUN  curl -o /var/subsonic/subsonic-$S_VERSION-standalone.tar.gz \
      https://s3-eu-west-1.amazonaws.com/subsonic-public/download/subsonic-$S_VERSION-standalone.tar.gz && \
