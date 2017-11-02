@@ -1,4 +1,4 @@
-FROM arubislander/armhf-openjdk
+FROM arubislander/openjdk
 MAINTAINER ArubIslander <arubislander@zonnet.nl>
 
 RUN  apt-get update && apt-get install -y --no-install-recommends curl \
