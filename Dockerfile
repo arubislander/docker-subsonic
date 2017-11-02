@@ -1,4 +1,4 @@
-FROM arubislander/openjdk
+FROM arubislander/armhf-openjdk
 MAINTAINER ArubIslander <arubislander@zonnet.nl>
 
 RUN  apt-get update && apt-get install -y --no-install-recommends curl \
@@ -31,7 +31,7 @@ RUN groupadd -r $S_USER && \
 
 USER $S_USER
 
-ENV S_VERSION 6.1.beta2
+ENV S_VERSION 6.1.2
 
 RUN  curl -o /var/subsonic/subsonic-$S_VERSION-standalone.tar.gz \
      https://s3-eu-west-1.amazonaws.com/subsonic-public/download/subsonic-$S_VERSION-standalone.tar.gz && \
